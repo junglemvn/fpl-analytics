@@ -1,0 +1,25 @@
+# Local data and external archive
+/data/
+/epl-premier-league-dataset/
+
+# Generated artifacts
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+.cache/
+*.pkl
+*.joblib
+*.sqlite*
+.DS_Store
+
+# Local environments and settings
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+/.vscode/*
+!/.vscode/extensions.json
+/Setup VS Code.command
+/docs/vscode_setup.md
