@@ -1,125 +1,78 @@
 # FPL learning and analysis
 
-Build a personal football stats tool while learning Python, SQL, statistics and boosting. Start with a small historical stats explorer; extend it with a Telegram interface, forecasts and squad optimization after the underlying pieces are validated.
+Collect and prepare FPL data for player and team EDA, then forecasting. PostgreSQL and SQL learning are later work.
 
-**Original dataset:** [Toibinguz/epl-premier-league-dataset on Hugging Face](https://huggingface.co/datasets/Toibinguz/epl-premier-league-dataset).
-
-The global milestones, first-product scope, acceptance checks and daily learning exercises are in [the project roadmap](docs/project_roadmap.md).
-
-## Current data
-
-The downloaded source dataset is at `data/raw/epl-premier-league-dataset/`. Start with these files for 2024/25:
-
-- `raw_data/fpl_api/fpl_merged_gw_2024_2025.csv`: 27,605 player/manager-fixture records. Excluding 322 `AM` manager records leaves 27,283 records for 784 players.
-- `raw_data/fpl_api/fpl_fixtures_2024_2025.csv`: 380 fixtures.
-- `raw_data/fpl_api/fpl_teams_2024_2025.csv`: 20 teams.
-
-Keep original downloads unchanged. Begin with a structural audit and then alternate validation, SQL work and EDA. The first planned product supports player leaderboards, comparisons, history plots and team result summaries; it uses existing files without live collection.
-
-The dataset is credited to Le Truong Giang in the translated catalog. See the original dataset README for its documentation and retain attribution. Keep downloaded data and generated databases locally; the GitHub repository should track our code, SQL, notebooks, documentation and reproducible download/preparation instructions. Record the dataset revision used by a run.
-
-## Planned application architecture
-
-The first product reads the downloaded historical data. Collection schedules, the curated database, model jobs and Telegram service below are planned extensions, not currently deployed components.
-
-```mermaid
-flowchart TD
-    S[Dataset files / verified live sources] --> C[Import or collect]
-    C --> R[Raw response files and provenance]
-    R --> V[Parse and validate]
-    V --> D[(Curated SQLite database)]
-
-    D --> Q[Statistics query functions]
-    Q --> B[Telegram command handlers / dashboard]
-
-    D --> H[Historical features and observed targets]
-    H --> T[Train and validate candidate model]
-    T --> A[Approved model and preprocessing artifacts]
-
-    D --> F[Features for upcoming fixtures]
-    F --> I[Generate predictions]
-    A --> I
-    I --> P[(Prediction tables in SQLite)]
-    P --> B
-    P --> O[Squad optimizer]
-    O --> B
-
-    U[User] -->|Command and filters| B
-    B -->|Statistics, forecasts or squad response| U
-```
-
-The diagram shows data dependencies. A scheduler or an explicit run command triggers each job; a new database row does not automatically execute every downstream step.
-
-| Process | Input → output | Proposed trigger |
-|---|---|---|
-| Import / collection | Files or source responses → archived raw inputs | Manually for the historical MVP; later on a schedule around matches and deadlines |
-| Validation and database update | Raw inputs → consistent player, team and fixture tables | After an import; publish updates only after required checks pass |
-| Statistics queries | Curated records and filters → summaries | A notebook, dashboard or bot request |
-| Feature preparation | A dated data snapshot → historical training rows or upcoming-fixture features | As part of the training or prediction job |
-| Training | Historical features and known actual points → candidate model | Initially manual; later a reviewed cadence after new completed gameweeks |
-| Model validation and approval | Candidate and temporal evaluation results → approved model version | Before replacing the serving model |
-| Prediction / inference | Approved model plus upcoming features → expected points | After relevant validated data changes and before the target deadline |
-| Squad optimization | Predictions, prices and user constraints → selected squad/lineup | A user request, reusing the relevant prediction run |
-| Presentation | Query/forecast/optimization results → message, table or chart | A user request |
-
-The bot calls Python functions that query the database, retrieve predictions or run optimization. Collection and training run independently of those requests. With long polling, the bot process receives commands from Telegram while running; a public webhook is an alternative. See the [Telegram Bot API](https://core.telegram.org/bots/api#getting-updates).
-
-## How a model runs in production
-
-**Updating records, generating predictions and retraining are three different operations.** Our initial design uses scheduled batch predictions and a separately approved trained model.
-
-1. **Train:** build historical examples using only information available before each prediction cutoff. The target is actual points subsequently earned. Fit preprocessing and the model on training data, select using chronological development periods, and preserve a separate final evaluation period.
-2. **Save:** store the approved fitted model and preprocessing, feature definitions, dependency versions, training cutoff and evaluation results. The model is a versioned artifact on disk/object storage; its metadata can be recorded in SQLite. It is not just a table of input records. See [model persistence](https://scikit-learn.org/stable/model_persistence.html).
-3. **Predict:** load that approved artifact, prepare upcoming-fixture features with the same transformations, and call prediction. Predictions can change when input features change even while the fitted model remains unchanged.
-4. **Store:** write a complete prediction run to SQLite. Record the model version, feature version, data snapshot/version, generation timestamp, input cutoff, player/fixture IDs and target gameweek or horizon. Publish the run atomically so users do not receive a mixture of partially generated results.
-5. **Respond:** a request such as a future `/forecast <player_id>` reads a compatible stored prediction; `/squad` can optimize over that same run. A user command does not call training. If no valid run covers the requested gameweek, report that rather than silently serving an old forecast.
-6. **Evaluate and consider retraining:** after fixtures finish and actual points are available, compare predictions with outcomes. On a chosen cadence, train a candidate on an updated historical window, evaluate it on later development periods and decide whether to replace the current model. Retain the previous version for rollback. The final holdout is not repeatedly used to decide every weekly replacement.
-
-For example, model `v1` can generate forecasts from snapshot `A`. When validated new results or availability information produce snapshot `B`, `v1` generates refreshed forecasts from `B`. A later training job may produce candidate `v2`; it becomes the serving model only after evaluation and approval. Merely receiving a new fixture, result or user request does not change the model's fitted parameters. Upcoming fixtures have no observed points target yet, so they are prediction inputs rather than newly labelled training examples.
-
-For this first deployment, use one fixed approved model and refresh its predictions as relevant inputs change. Review forecast quality after completed gameweeks; establish a retraining cadence only after enough evidence is available. Continuous/online learning is a separate design choice and is not required here.
-
-The initial statistics-only MVP skips model training, prediction storage and squad optimization: the user requests a summary, the query function reads curated historical records, and the bot/dashboard displays it.
-
-## Storage and hosting
-
-- **Original inputs:** immutable downloaded files and timestamped collection responses, with source URLs/revisions and import receipts.
-- **Curated data:** SQLite tables for teams, players, fixtures and player-match records. Later add feature/prediction run metadata and predictions.
-- **Model artifacts:** versioned fitted models and preprocessing stored separately from raw data, referenced by model version.
-- **Application:** reusable `.py` modules and a running bot process. Notebooks remain the place for EDA and experiments.
-
-During development these live on the Mac. A personal deployment can run on one server with persistent disk for SQLite and artifacts, plus backups. A database file must survive application restarts/redeployments. PostgreSQL can be introduced if shared access or concurrent writers justify it; it is not necessary for the first personal bot.
-
-Responses should distinguish the time of the last successful refresh, the period actually covered by the source data, and the cutoff/model version used for a forecast. Copying an old dataset today does not make its observations current. On failed updates, preserve the last valid data and explicitly identify stale or unavailable forecasts. Keep the Telegram token outside versioned code and restrict the personal bot to the intended user/chat.
-
-## Working structure
+## Repository navigation
 
 ```text
-fpl/
-├── data/
-│   ├── raw/epl-premier-league-dataset/  # Downloaded source files
-│   ├── processed/                     # Curated outputs; FPL database is planned
-│   └── pl_goals.sqlite                # Earlier scraper prototype: no player stats
-├── docs/
-│   ├── project_roadmap.md
-│   ├── epl_raw_data_catalog_en.md
-│   └── web_scraping_dataset_findings.md
-├── notebooks/                         # Learning, preparation and EDA
-├── src/                               # Reusable Python code and scraping exercises
-├── sql/                               # Schema and query files
-└── reports/figures/
+src/                            Collection, parsing, joins and validation
+notebooks/                      Preparation, then EDA and modelling
+  01_data_preparation.ipynb
+tests/                          Preparation and defensive-scoring checks
+docs/
+  fpl_rules.md                   Scoring definitions and target policy
+  fpl_collection_learning.md     Collection commands and table definitions
+.vscode/extensions.json          Shared editor recommendations
+requirements.txt                Python dependencies
+.gitignore                      Local data, caches and machine settings
 ```
 
-## Existing artifacts
+External archive: **`/epl-premier-league-dataset`**, retained locally. It is the downloaded [source dataset](https://huggingface.co/datasets/Toibinguz/epl-premier-league-dataset); its location is configured by `ARCHIVE_DIR` in Notebook 1.
 
-`notebooks/01_data_preparation.ipynb` was created before the full dataset download. Its saved run inventories links from `data/fpl_api`, a saved HTML listing. It needs updated source paths and player identity handling before it can prepare the actual downloaded files. In particular, the cleaned player-summary CSV has no player ID; use validated IDs from the player-match records.
+## Self-collected data navigation
 
-`src/collect_pl_goals.py`, `data/pl_goals.sqlite` and the corresponding SQL files are an earlier collection prototype. The proposed live endpoint and parser remain unverified; that database is separate from the curated FPL database proposed in the roadmap.
+**Self-collected API responses** is the appropriate term for the raw JSON. Parsing converts those responses into records; cleaning and joining produce **prepared tables**. The combined player history is a **joined player-fixture table**.
 
-The scraping practice session and [first lesson](docs/scraping_lesson_01.md) remain separate from the offline stats product.
+These data paths are local and excluded from Git:
 
-## Environment
+```text
+data/raw/fpl_api/<season>/<batch_utc>/
+  bootstrap-static.json
+  fixtures.json
+  element-summary/<player_id>.json
+  manifest.json
 
-Python, pandas, JupyterLab, SQLite and Scrapy were found in the local Anaconda environment. `python` and `python3` point to different installations here; check the selected interpreter before installing packages or running commands. `requirements.txt` describes notebook dependencies and is not yet a complete environment specification for a future bot/model application.
+data/processed/fpl_self_collected/<season>/<batch>/
+  fpl_cleaned_players_<season>.csv    Player season-to-date totals
+  current_player_snapshot.csv        Dated attributes with native IDs
+  fpl_teams_<season>.csv              Team reference table
+  fpl_fixtures_<season>.csv           Fixture context and results
+  current_player_matches.csv         Parsed player-fixture history
+  reconciliation.csv
+  manifest.json
 
-The notebook style follows the adjacent `fraud-detection` project: numbered notebooks, short explanations, pandas summaries, explicit validation, documented transformations and saved outputs.
+data/processed/
+  fpl_tables.pkl                     Joined and checked EDA tables
+  fpl_audits.pkl                     Quality and collection evidence
+  fpl_manifest.json                  Coverage and source checksums
+```
+
+For future canonical CSV exports, use `players_<season>.csv`, `teams_<season>.csv`, `fixtures_<season>.csv` and `player_matches_<season>.csv`. Describe their grain explicitly and retain FPL IDs. Existing `fpl_*` filenames remain available for source-format compatibility; current files have not been renamed.
+
+## Current preparation
+
+[Notebook 1](notebooks/01_data_preparation.ipynb) prepares 113,260 historical player-fixture records for 2022/23–2025/26. Complete API batch `20261110T210622560387Z` supplies 6,562 current records for 672 players across 100 finalized fixtures through GW 10.
+
+Names and positions join by `(season, fpl_player_id)`; match-time club names join by `(season, fpl_team_id)`. Match records use `(season, fpl_player_id, fpl_fixture_id)`. Snapshots, teams and fixtures stay separate. FotMob matching evidence remains in audits.
+
+Historical `P_off` preserves original awards and `P_adj` retains the existing adjustment. Current `P_off` is preserved exactly as collected. Consult [the rules reference](docs/fpl_rules.md) before changing scoring.
+
+Run Notebook 1 from the project or `notebooks/` directory. Select another complete raw batch with `COLLECTION_BATCH`. Load the resulting dictionary with `pd.read_pickle("data/processed/fpl_tables.pkl")` for EDA. Preparation preserves raw responses and replaces generated outputs.
+
+## Collection and development
+
+- `src/collect_fpl.py`: full collection and offline parsing
+- `src/collect_players.py`, `src/collect_teams.py`: smaller snapshot collectors
+- `src/data_preparation.py`: joins, validation and exports
+- `src/fotmob_identity.py`, `src/defensive_contributions.py`: historical enrichment
+- `src/download_dataset.py`: archive download utility
+
+See [the collection guide](docs/fpl_collection_learning.md) for commands. Use the same Python environment for scripts and notebooks, with dependencies from `requirements.txt`. Editor interpreter settings and Mac-specific setup helpers remain local.
+
+Next: Notebook 2 for player/team EDA, followed by forecasting baselines and chronological evaluation. Add model code, curated reports and PostgreSQL work to the repository when implemented; retain raw batches, generated datasets and binary model artifacts outside Git.
+
+## Copyright and use
+
+Copyright © 2026 Zhangir Bayanov. All rights reserved.
+
+The original code is available for personal, noncommercial use under the repository's license. Commercial use requires the copyright holder's permission. [License terms](LICENSE)
