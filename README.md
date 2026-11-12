@@ -9,7 +9,6 @@ src/                            Collection, preparation and reusable EDA calcula
 notebooks/
   01_data_preparation.ipynb       Completed preparation and validation
   02_eda.ipynb                   Completed player/team EDA and findings
-logos/                          All 27 club emblems used by the historical/current data
 docs/
   fpl_rules.md                   Scoring definitions and target policy
   fpl_collection_learning.md     Collection commands and table definitions
