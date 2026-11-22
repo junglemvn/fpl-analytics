@@ -161,53 +161,6 @@ substitutions, chips and multiweek planning follow later. Fresh data updates fea
 predictions; retraining and new research versions are separate processes. Any refit using
 2025/26 outcomes requires later evaluation rather than reusing the earlier test claim.
 
-## Public source modules
-
-Upload these existing `src/` files. They support the public preparation, EDA and benchmark
-notebooks without importing the private forecasting helpers.
-
-| Area | Files |
-|---|---|
-| Collection and download | `collect_fpl.py`, `collect_players.py`, `collect_teams.py`, `download_dataset.py` |
-| Preparation and enrichment | `data_preparation.py`, `eda_preparation.py`, `fotmob_identity.py`, `defensive_contributions.py` |
-| Player/team analysis | `player_analysis.py`, `team_analysis.py`, `current_player_analysis.py`, `current_team_analysis.py` |
-| Synthesis and figures | `analysis_synthesis.py`, `ranking_uncertainty.py`, `plot_annotations.py` |
-| Chronological benchmarks | `model_preparation.py` |
-
-## GitHub scope
-
-Include the public source modules above, notebooks 1–3 and `04_model_results.ipynb`,
-`reports/public/model_results.json`, required `logos/`, the two public documents and the root
-README, license, requirements and ignore files. `.vscode/extensions.json` is the only shared
-editor setting. Selected notebook outputs can remain for reading without local datasets.
-
-Keep the following source files and the working modelling notebook local:
-
-```text
-notebooks/04_boosting_and_forecasts.ipynb
-src/boosting_features.py
-src/boosting_experiments.py
-src/fpl_availability.py
-src/fpl_forecast_context.py
-src/fpl_followup_diagnostics.py
-src/fpl_final_pipeline.py
-src/fpl_forecast_exports.py
-```
-
-The diagnostics helper contains tuned parameter values, and the final pipeline uses the
-private model contract. The other excluded modules implement forecasting features and
-experiments. Keeping the whole group private makes the publication boundary explicit.
-
-Keep raw/processed data, model JSONs and manifests, local tests, planning notes, external
-archives, caches and environments outside Git. Only the approved aggregate public report
-is included from `reports/`. `.gitignore` records these exclusions; manually upload the
-public files rather than the whole `src/` folder. If a private file was already published,
-adding an ignore rule does not remove its earlier contents from repository history.
-
-The public results notebook reproduces result tables from the supplied summary. It does not
-retrain the private model. Public preparation/EDA notebooks require local source data; the
-public benchmark code remains available for inspecting the evaluation logic.
-
 ## Copyright and use
 
 Copyright © 2026 Zhangir Bayanov.
