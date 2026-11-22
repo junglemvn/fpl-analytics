@@ -1,0 +1,1131 @@
+{
+  "schema_version": "fpl_public_model_results_v1",
+  "model_version": "v4",
+  "grain": "recorded player-fixture",
+  "periods": [
+    {
+      "phase": "Development fit",
+      "period": "2022/23–2023/24",
+      "rows": 56230
+    },
+    {
+      "phase": "Development validation",
+      "period": "2024/25",
+      "rows": 27283
+    },
+    {
+      "phase": "Frozen refit",
+      "period": "2022/23–2024/25",
+      "rows": 83513
+    },
+    {
+      "phase": "Reserved evaluation",
+      "period": "2025/26",
+      "rows": 29747
+    }
+  ],
+  "metric_definitions": {
+    "RMSE": "Square root of mean squared forecast error, in FPL points.",
+    "MAE": "Mean absolute forecast error, in FPL points.",
+    "bias": "Mean forecast minus observed points. Positive values indicate overprediction."
+  },
+  "overall": [
+    {
+      "phase": "Development validation",
+      "season": "2024/25",
+      "model": "Recent-five",
+      "rows": 27283,
+      "RMSE": 2.16973335,
+      "MAE": 1.1210927,
+      "bias": 0.00298094
+    },
+    {
+      "phase": "Development validation",
+      "season": "2024/25",
+      "model": "XGBoost v4",
+      "rows": 27283,
+      "RMSE": 1.97699712,
+      "MAE": 1.04323568,
+      "bias": 0.00575295
+    },
+    {
+      "phase": "Reserved evaluation",
+      "season": "2025/26",
+      "model": "Recent-five",
+      "rows": 29747,
+      "RMSE": 2.11819235,
+      "MAE": 1.05807492,
+      "bias": 0.01391329
+    },
+    {
+      "phase": "Reserved evaluation",
+      "season": "2025/26",
+      "model": "XGBoost v4",
+      "rows": 29747,
+      "RMSE": 1.90136561,
+      "MAE": 0.96041038,
+      "bias": -0.0143567
+    }
+  ],
+  "feature_comparisons": [
+    {
+      "features": "Fixed XGBoost reference",
+      "fold_rmse": 1.9915,
+      "validation_rmse": 2.0108
+    },
+    {
+      "features": "Remove team context",
+      "fold_rmse": 1.9994,
+      "validation_rmse": null
+    },
+    {
+      "features": "Add longer and weighted history",
+      "fold_rmse": 1.9863,
+      "validation_rmse": 2.0062
+    },
+    {
+      "features": "Add saves, defensive awards and bonus",
+      "fold_rmse": 1.9918,
+      "validation_rmse": null
+    },
+    {
+      "features": "Weighted history with FPL status",
+      "fold_rmse": 1.95450657,
+      "validation_rmse": 1.9798543
+    },
+    {
+      "features": "Further add round-matched playing chance",
+      "fold_rmse": 1.95176606,
+      "validation_rmse": 1.97699712
+    },
+    {
+      "features": "Instead add league rest and congestion",
+      "fold_rmse": 1.95437869,
+      "validation_rmse": 1.97951457
+    }
+  ],
+  "available_regulars": [
+    {
+      "phase": "Development validation",
+      "cohort": "Available and prior-five mean >=60 min",
+      "model": "Weighted history",
+      "rows": 5930,
+      "RMSE": 3.19509509,
+      "MAE": 2.36943663,
+      "bias": -0.15352309
+    },
+    {
+      "phase": "Development validation",
+      "cohort": "Available and prior-five mean >=60 min",
+      "model": "XGBoost v4",
+      "rows": 5930,
+      "RMSE": 3.19062184,
+      "MAE": 2.3966045,
+      "bias": -0.05612779
+    },
+    {
+      "phase": "Reserved evaluation",
+      "cohort": "Available and prior-five mean >=60 min",
+      "model": "Recent-five",
+      "rows": 5909,
+      "RMSE": 3.45554105,
+      "MAE": 2.6461584,
+      "bias": 0.34579173
+    },
+    {
+      "phase": "Reserved evaluation",
+      "cohort": "Available and prior-five mean >=60 min",
+      "model": "XGBoost v4",
+      "rows": 5909,
+      "RMSE": 3.11599545,
+      "MAE": 2.36321278,
+      "bias": -0.03599199
+    }
+  ],
+  "reporting": {
+    "reserved_scored_at_utc": "2026-11-21T16:47:18.751575+00:00",
+    "forecast_season": "2026/27",
+    "forecast_gameweek": 12,
+    "forecast_snapshot_utc": "2026-11-21T16:45:21+00:00",
+    "forecast_deadline_utc": "2026-11-27T18:30:00+00:00",
+    "history_through_gameweek": 10,
+    "fixture_rows": 672,
+    "gameweek_roster_rows": 672
+  },
+  "reserved_subgroups": {
+    "position": [
+      {
+        "group": "DEF",
+        "model": "Recent-five",
+        "rows": 9733,
+        "RMSE": 2.3282355,
+        "MAE": 1.23179278,
+        "bias": 0.01168161
+      },
+      {
+        "group": "DEF",
+        "model": "XGBoost v4",
+        "rows": 9733,
+        "RMSE": 2.08487065,
+        "MAE": 1.11100397,
+        "bias": -0.06826852
+      },
+      {
+        "group": "FWD",
+        "model": "Recent-five",
+        "rows": 3278,
+        "RMSE": 2.2505816,
+        "MAE": 1.1253305,
+        "bias": 0.0036008
+      },
+      {
+        "group": "FWD",
+        "model": "XGBoost v4",
+        "rows": 3278,
+        "RMSE": 2.04162955,
+        "MAE": 1.05764182,
+        "bias": 0.01524373
+      },
+      {
+        "group": "GK",
+        "model": "Recent-five",
+        "rows": 3427,
+        "RMSE": 1.56531852,
+        "MAE": 0.63092066,
+        "bias": 0.01563904
+      },
+      {
+        "group": "GK",
+        "model": "XGBoost v4",
+        "rows": 3427,
+        "RMSE": 1.40289463,
+        "MAE": 0.61107555,
+        "bias": 0.016696
+      },
+      {
+        "group": "MID",
+        "model": "Recent-five",
+        "rows": 13309,
+        "RMSE": 2.04589263,
+        "MAE": 1.02445841,
+        "bias": 0.01764092
+      },
+      {
+        "group": "MID",
+        "model": "XGBoost v4",
+        "rows": 13309,
+        "RMSE": 1.83524877,
+        "MAE": 0.91628373,
+        "bias": 0.00978306
+      }
+    ],
+    "gameweek": [
+      {
+        "group": 1,
+        "model": "Recent-five",
+        "rows": 690,
+        "RMSE": 2.54462762,
+        "MAE": 1.66997396,
+        "bias": -0.17628799
+      },
+      {
+        "group": 1,
+        "model": "XGBoost v4",
+        "rows": 690,
+        "RMSE": 2.46923436,
+        "MAE": 1.64176244,
+        "bias": -0.02846313
+      },
+      {
+        "group": 2,
+        "model": "Recent-five",
+        "rows": 705,
+        "RMSE": 2.87187998,
+        "MAE": 1.31761958,
+        "bias": 0.1072564
+      },
+      {
+        "group": 2,
+        "model": "XGBoost v4",
+        "rows": 705,
+        "RMSE": 2.23276938,
+        "MAE": 1.1386505,
+        "bias": -0.03993575
+      },
+      {
+        "group": 3,
+        "model": "Recent-five",
+        "rows": 712,
+        "RMSE": 2.35047327,
+        "MAE": 1.20381482,
+        "bias": 0.02220522
+      },
+      {
+        "group": 3,
+        "model": "XGBoost v4",
+        "rows": 712,
+        "RMSE": 1.94424259,
+        "MAE": 1.04055191,
+        "bias": -0.10237872
+      },
+      {
+        "group": 4,
+        "model": "Recent-five",
+        "rows": 740,
+        "RMSE": 2.11601179,
+        "MAE": 1.13165379,
+        "bias": 4.377e-05
+      },
+      {
+        "group": 4,
+        "model": "XGBoost v4",
+        "rows": 740,
+        "RMSE": 1.98277805,
+        "MAE": 1.06299316,
+        "bias": -0.11669058
+      },
+      {
+        "group": 5,
+        "model": "Recent-five",
+        "rows": 741,
+        "RMSE": 2.04373925,
+        "MAE": 1.02752362,
+        "bias": 0.19419028
+      },
+      {
+        "group": 5,
+        "model": "XGBoost v4",
+        "rows": 741,
+        "RMSE": 1.7923865,
+        "MAE": 0.92151801,
+        "bias": 0.03535169
+      },
+      {
+        "group": 6,
+        "model": "Recent-five",
+        "rows": 742,
+        "RMSE": 2.00803527,
+        "MAE": 1.00837419,
+        "bias": 0.1523095
+      },
+      {
+        "group": 6,
+        "model": "XGBoost v4",
+        "rows": 742,
+        "RMSE": 1.89813579,
+        "MAE": 0.92183307,
+        "bias": 0.03335566
+      },
+      {
+        "group": 7,
+        "model": "Recent-five",
+        "rows": 743,
+        "RMSE": 2.02557603,
+        "MAE": 1.04988378,
+        "bias": 0.01044905
+      },
+      {
+        "group": 7,
+        "model": "XGBoost v4",
+        "rows": 743,
+        "RMSE": 1.82148861,
+        "MAE": 0.91584456,
+        "bias": -0.0543522
+      },
+      {
+        "group": 8,
+        "model": "Recent-five",
+        "rows": 745,
+        "RMSE": 2.20497778,
+        "MAE": 1.07904391,
+        "bias": -0.03572119
+      },
+      {
+        "group": 8,
+        "model": "XGBoost v4",
+        "rows": 745,
+        "RMSE": 2.04335882,
+        "MAE": 0.98915844,
+        "bias": -0.07137021
+      },
+      {
+        "group": 9,
+        "model": "Recent-five",
+        "rows": 746,
+        "RMSE": 2.14703935,
+        "MAE": 1.03424528,
+        "bias": -0.02151879
+      },
+      {
+        "group": 9,
+        "model": "XGBoost v4",
+        "rows": 746,
+        "RMSE": 1.9687462,
+        "MAE": 0.96117847,
+        "bias": -0.04490697
+      },
+      {
+        "group": 10,
+        "model": "Recent-five",
+        "rows": 747,
+        "RMSE": 1.9942559,
+        "MAE": 1.03258465,
+        "bias": -0.00784373
+      },
+      {
+        "group": 10,
+        "model": "XGBoost v4",
+        "rows": 747,
+        "RMSE": 1.81683807,
+        "MAE": 0.94077272,
+        "bias": 0.00237118
+      },
+      {
+        "group": 11,
+        "model": "Recent-five",
+        "rows": 752,
+        "RMSE": 2.13739486,
+        "MAE": 1.06013354,
+        "bias": -0.08348348
+      },
+      {
+        "group": 11,
+        "model": "XGBoost v4",
+        "rows": 752,
+        "RMSE": 1.97752712,
+        "MAE": 1.00623321,
+        "bias": -0.07669209
+      },
+      {
+        "group": 12,
+        "model": "Recent-five",
+        "rows": 755,
+        "RMSE": 2.22189903,
+        "MAE": 1.07735613,
+        "bias": 0.02146209
+      },
+      {
+        "group": 12,
+        "model": "XGBoost v4",
+        "rows": 755,
+        "RMSE": 2.02697853,
+        "MAE": 0.98258774,
+        "bias": -0.03243131
+      },
+      {
+        "group": 13,
+        "model": "Recent-five",
+        "rows": 755,
+        "RMSE": 2.20720374,
+        "MAE": 1.08039735,
+        "bias": 0.06662252
+      },
+      {
+        "group": 13,
+        "model": "XGBoost v4",
+        "rows": 755,
+        "RMSE": 1.96063092,
+        "MAE": 0.98523111,
+        "bias": 0.04628968
+      },
+      {
+        "group": 14,
+        "model": "Recent-five",
+        "rows": 758,
+        "RMSE": 2.3360616,
+        "MAE": 1.13045806,
+        "bias": -0.06356129
+      },
+      {
+        "group": 14,
+        "model": "XGBoost v4",
+        "rows": 758,
+        "RMSE": 2.10498349,
+        "MAE": 1.01939491,
+        "bias": -0.08394035
+      },
+      {
+        "group": 15,
+        "model": "Recent-five",
+        "rows": 759,
+        "RMSE": 2.03198992,
+        "MAE": 1.02600489,
+        "bias": -0.00706494
+      },
+      {
+        "group": 15,
+        "model": "XGBoost v4",
+        "rows": 759,
+        "RMSE": 1.94319644,
+        "MAE": 0.99217462,
+        "bias": -0.0395083
+      },
+      {
+        "group": 16,
+        "model": "Recent-five",
+        "rows": 760,
+        "RMSE": 2.19568694,
+        "MAE": 1.08610622,
+        "bias": 0.00057991
+      },
+      {
+        "group": 16,
+        "model": "XGBoost v4",
+        "rows": 760,
+        "RMSE": 2.04782004,
+        "MAE": 1.00501338,
+        "bias": -0.05731329
+      },
+      {
+        "group": 17,
+        "model": "Recent-five",
+        "rows": 770,
+        "RMSE": 2.25268719,
+        "MAE": 1.18144347,
+        "bias": 0.02040451
+      },
+      {
+        "group": 17,
+        "model": "XGBoost v4",
+        "rows": 770,
+        "RMSE": 1.90510668,
+        "MAE": 0.94334251,
+        "bias": -0.09543516
+      },
+      {
+        "group": 18,
+        "model": "Recent-five",
+        "rows": 775,
+        "RMSE": 2.20055582,
+        "MAE": 1.08209342,
+        "bias": 0.03693213
+      },
+      {
+        "group": 18,
+        "model": "XGBoost v4",
+        "rows": 775,
+        "RMSE": 1.84472236,
+        "MAE": 0.88241694,
+        "bias": -0.05459998
+      },
+      {
+        "group": 19,
+        "model": "Recent-five",
+        "rows": 780,
+        "RMSE": 2.20233385,
+        "MAE": 1.12867215,
+        "bias": -0.04876375
+      },
+      {
+        "group": 19,
+        "model": "XGBoost v4",
+        "rows": 780,
+        "RMSE": 1.94477326,
+        "MAE": 0.9788883,
+        "bias": -0.13665475
+      },
+      {
+        "group": 20,
+        "model": "Recent-five",
+        "rows": 790,
+        "RMSE": 2.19810805,
+        "MAE": 1.08620987,
+        "bias": 0.03886809
+      },
+      {
+        "group": 20,
+        "model": "XGBoost v4",
+        "rows": 790,
+        "RMSE": 1.89944875,
+        "MAE": 0.91844026,
+        "bias": -0.03663818
+      },
+      {
+        "group": 21,
+        "model": "Recent-five",
+        "rows": 795,
+        "RMSE": 1.9415392,
+        "MAE": 0.9775249,
+        "bias": 0.04130451
+      },
+      {
+        "group": 21,
+        "model": "XGBoost v4",
+        "rows": 795,
+        "RMSE": 1.74893523,
+        "MAE": 0.8896883,
+        "bias": -0.01056356
+      },
+      {
+        "group": 22,
+        "model": "Recent-five",
+        "rows": 799,
+        "RMSE": 2.01238734,
+        "MAE": 1.06602303,
+        "bias": 0.01833086
+      },
+      {
+        "group": 22,
+        "model": "XGBoost v4",
+        "rows": 799,
+        "RMSE": 1.76348887,
+        "MAE": 0.93676455,
+        "bias": -0.03323274
+      },
+      {
+        "group": 23,
+        "model": "Recent-five",
+        "rows": 803,
+        "RMSE": 2.11491168,
+        "MAE": 1.11461294,
+        "bias": 0.04155358
+      },
+      {
+        "group": 23,
+        "model": "XGBoost v4",
+        "rows": 803,
+        "RMSE": 1.84861949,
+        "MAE": 0.96741983,
+        "bias": 0.01779083
+      },
+      {
+        "group": 24,
+        "model": "Recent-five",
+        "rows": 811,
+        "RMSE": 2.12104436,
+        "MAE": 1.07360617,
+        "bias": 0.0439111
+      },
+      {
+        "group": 24,
+        "model": "XGBoost v4",
+        "rows": 811,
+        "RMSE": 1.8344541,
+        "MAE": 0.92185691,
+        "bias": 0.02781889
+      },
+      {
+        "group": 25,
+        "model": "Recent-five",
+        "rows": 817,
+        "RMSE": 2.00563115,
+        "MAE": 1.00369022,
+        "bias": 0.05742187
+      },
+      {
+        "group": 25,
+        "model": "XGBoost v4",
+        "rows": 817,
+        "RMSE": 1.78960188,
+        "MAE": 0.89321302,
+        "bias": 0.03146673
+      },
+      {
+        "group": 26,
+        "model": "Recent-five",
+        "rows": 896,
+        "RMSE": 2.03497148,
+        "MAE": 1.00489211,
+        "bias": 0.06932664
+      },
+      {
+        "group": 26,
+        "model": "XGBoost v4",
+        "rows": 896,
+        "RMSE": 1.83258464,
+        "MAE": 0.89962886,
+        "bias": 0.05657207
+      },
+      {
+        "group": 27,
+        "model": "Recent-five",
+        "rows": 818,
+        "RMSE": 1.97488464,
+        "MAE": 0.9383802,
+        "bias": -0.02584148
+      },
+      {
+        "group": 27,
+        "model": "XGBoost v4",
+        "rows": 818,
+        "RMSE": 1.82541132,
+        "MAE": 0.88973418,
+        "bias": -0.00047783
+      },
+      {
+        "group": 28,
+        "model": "Recent-five",
+        "rows": 819,
+        "RMSE": 1.97149469,
+        "MAE": 0.94504363,
+        "bias": 0.06710305
+      },
+      {
+        "group": 28,
+        "model": "XGBoost v4",
+        "rows": 819,
+        "RMSE": 1.78726369,
+        "MAE": 0.90229098,
+        "bias": 0.07476537
+      },
+      {
+        "group": 29,
+        "model": "Recent-five",
+        "rows": 820,
+        "RMSE": 1.9139521,
+        "MAE": 0.93481339,
+        "bias": -0.03908905
+      },
+      {
+        "group": 29,
+        "model": "XGBoost v4",
+        "rows": 820,
+        "RMSE": 1.83426177,
+        "MAE": 0.90748862,
+        "bias": -0.00543349
+      },
+      {
+        "group": 30,
+        "model": "Recent-five",
+        "rows": 822,
+        "RMSE": 1.98577322,
+        "MAE": 1.00814351,
+        "bias": -0.09939907
+      },
+      {
+        "group": 30,
+        "model": "XGBoost v4",
+        "rows": 822,
+        "RMSE": 1.79332862,
+        "MAE": 0.94284399,
+        "bias": -0.04651611
+      },
+      {
+        "group": 31,
+        "model": "Recent-five",
+        "rows": 664,
+        "RMSE": 2.02107197,
+        "MAE": 0.97009243,
+        "bias": -0.07508829
+      },
+      {
+        "group": 31,
+        "model": "XGBoost v4",
+        "rows": 664,
+        "RMSE": 1.81322525,
+        "MAE": 0.89080697,
+        "bias": -0.02130214
+      },
+      {
+        "group": 32,
+        "model": "Recent-five",
+        "rows": 826,
+        "RMSE": 2.16148723,
+        "MAE": 0.98080748,
+        "bias": 0.00889465
+      },
+      {
+        "group": 32,
+        "model": "XGBoost v4",
+        "rows": 826,
+        "RMSE": 1.99361189,
+        "MAE": 0.92131697,
+        "bias": 0.01321272
+      },
+      {
+        "group": 33,
+        "model": "Recent-five",
+        "rows": 1077,
+        "RMSE": 1.93591442,
+        "MAE": 0.94642605,
+        "bias": -0.03593235
+      },
+      {
+        "group": 33,
+        "model": "XGBoost v4",
+        "rows": 1077,
+        "RMSE": 1.77151904,
+        "MAE": 0.88458914,
+        "bias": -0.01627044
+      },
+      {
+        "group": 34,
+        "model": "Recent-five",
+        "rows": 582,
+        "RMSE": 1.95479869,
+        "MAE": 1.00912658,
+        "bias": 0.05586197
+      },
+      {
+        "group": 34,
+        "model": "XGBoost v4",
+        "rows": 582,
+        "RMSE": 1.75330407,
+        "MAE": 0.8929678,
+        "bias": 0.0242949
+      },
+      {
+        "group": 35,
+        "model": "Recent-five",
+        "rows": 832,
+        "RMSE": 2.06723545,
+        "MAE": 1.01466424,
+        "bias": 0.07476039
+      },
+      {
+        "group": 35,
+        "model": "XGBoost v4",
+        "rows": 832,
+        "RMSE": 1.84941617,
+        "MAE": 0.92193115,
+        "bias": 0.05806298
+      },
+      {
+        "group": 36,
+        "model": "Recent-five",
+        "rows": 920,
+        "RMSE": 2.028183,
+        "MAE": 0.99261844,
+        "bias": 0.03696627
+      },
+      {
+        "group": 36,
+        "model": "XGBoost v4",
+        "rows": 920,
+        "RMSE": 1.8185298,
+        "MAE": 0.91988403,
+        "bias": 0.04583864
+      },
+      {
+        "group": 37,
+        "model": "Recent-five",
+        "rows": 840,
+        "RMSE": 1.93387533,
+        "MAE": 0.9222722,
+        "bias": 0.03655791
+      },
+      {
+        "group": 37,
+        "model": "XGBoost v4",
+        "rows": 840,
+        "RMSE": 1.753137,
+        "MAE": 0.87740246,
+        "bias": 0.06624866
+      },
+      {
+        "group": 38,
+        "model": "Recent-five",
+        "rows": 841,
+        "RMSE": 1.99066802,
+        "MAE": 1.00274871,
+        "bias": 0.01963337
+      },
+      {
+        "group": 38,
+        "model": "XGBoost v4",
+        "rows": 841,
+        "RMSE": 1.81742762,
+        "MAE": 0.94370448,
+        "bias": 0.06428889
+      }
+    ],
+    "status": [
+      {
+        "group": "Available",
+        "model": "Recent-five",
+        "rows": 19610,
+        "RMSE": 2.49950369,
+        "MAE": 1.42652479,
+        "bias": -0.10006155
+      },
+      {
+        "group": "Available",
+        "model": "XGBoost v4",
+        "rows": 19610,
+        "RMSE": 2.28764452,
+        "MAE": 1.36284694,
+        "bias": -0.03070857
+      },
+      {
+        "group": "Doubtful",
+        "model": "Recent-five",
+        "rows": 1200,
+        "RMSE": 2.3240426,
+        "MAE": 1.48350159,
+        "bias": 0.6912426
+      },
+      {
+        "group": "Doubtful",
+        "model": "XGBoost v4",
+        "rows": 1200,
+        "RMSE": 1.91363,
+        "MAE": 1.06459962,
+        "bias": 0.04096224
+      },
+      {
+        "group": "Injured",
+        "model": "Recent-five",
+        "rows": 2053,
+        "RMSE": 1.17894097,
+        "MAE": 0.50033464,
+        "bias": 0.43394399
+      },
+      {
+        "group": "Injured",
+        "model": "XGBoost v4",
+        "rows": 2053,
+        "RMSE": 0.44110947,
+        "MAE": 0.13114209,
+        "bias": 0.02737162
+      },
+      {
+        "group": "Suspended",
+        "model": "Recent-five",
+        "rows": 151,
+        "RMSE": 2.0584672,
+        "MAE": 1.42838799,
+        "bias": 1.36481183
+      },
+      {
+        "group": "Suspended",
+        "model": "XGBoost v4",
+        "rows": 151,
+        "RMSE": 0.31148558,
+        "MAE": 0.21059229,
+        "bias": 0.13211716
+      },
+      {
+        "group": "Unavailable",
+        "model": "Recent-five",
+        "rows": 6427,
+        "RMSE": 0.13860508,
+        "MAE": 0.01609524,
+        "bias": 0.01485049
+      },
+      {
+        "group": "Unavailable",
+        "model": "XGBoost v4",
+        "rows": 6427,
+        "RMSE": 0.05267502,
+        "MAE": 0.02568029,
+        "bias": -0.0016976
+      },
+      {
+        "group": "Ineligible",
+        "model": "Recent-five",
+        "rows": 197,
+        "RMSE": 1.86830425,
+        "MAE": 1.24726735,
+        "bias": 1.22696278
+      },
+      {
+        "group": "Ineligible",
+        "model": "XGBoost v4",
+        "rows": 197,
+        "RMSE": 0.45680177,
+        "MAE": 0.30978141,
+        "bias": 0.28482799
+      },
+      {
+        "group": "Unknown",
+        "model": "Recent-five",
+        "rows": 109,
+        "RMSE": 1.23911375,
+        "MAE": 1.17589259,
+        "bias": 1.03178908
+      },
+      {
+        "group": "Unknown",
+        "model": "XGBoost v4",
+        "rows": 109,
+        "RMSE": 0.66569166,
+        "MAE": 0.36028571,
+        "bias": 0.04245372
+      }
+    ],
+    "status_coverage": [
+      {
+        "group": "Known",
+        "model": "Recent-five",
+        "rows": 29638,
+        "RMSE": 2.12075293,
+        "MAE": 1.05764162,
+        "bias": 0.01016983
+      },
+      {
+        "group": "Known",
+        "model": "XGBoost v4",
+        "rows": 29638,
+        "RMSE": 1.9044309,
+        "MAE": 0.96261747,
+        "bias": -0.01456563
+      },
+      {
+        "group": "Unknown",
+        "model": "Recent-five",
+        "rows": 109,
+        "RMSE": 1.23911375,
+        "MAE": 1.17589259,
+        "bias": 1.03178908
+      },
+      {
+        "group": "Unknown",
+        "model": "XGBoost v4",
+        "rows": 109,
+        "RMSE": 0.66569166,
+        "MAE": 0.36028571,
+        "bias": 0.04245372
+      }
+    ],
+    "prior_minutes": [
+      {
+        "group": "cold start",
+        "model": "Recent-five",
+        "rows": 844,
+        "RMSE": 2.38911121,
+        "MAE": 1.58839409,
+        "bias": -0.01833114
+      },
+      {
+        "group": "cold start",
+        "model": "XGBoost v4",
+        "rows": 844,
+        "RMSE": 2.29436912,
+        "MAE": 1.47130055,
+        "bias": -0.00615596
+      },
+      {
+        "group": "0 to <30",
+        "model": "Recent-five",
+        "rows": 19059,
+        "RMSE": 1.15419982,
+        "MAE": 0.33174091,
+        "bias": -0.13707697
+      },
+      {
+        "group": "0 to <30",
+        "model": "XGBoost v4",
+        "rows": 19059,
+        "RMSE": 1.06989332,
+        "MAE": 0.36064419,
+        "bias": -0.01289143
+      },
+      {
+        "group": "30 to <60",
+        "model": "Recent-five",
+        "rows": 3484,
+        "RMSE": 2.78443911,
+        "MAE": 1.95673555,
+        "bias": -0.00271718
+      },
+      {
+        "group": "30 to <60",
+        "model": "XGBoost v4",
+        "rows": 3484,
+        "RMSE": 2.47669393,
+        "MAE": 1.67198596,
+        "bias": -0.02613539
+      },
+      {
+        "group": "60+",
+        "model": "Recent-five",
+        "rows": 6360,
+        "RMSE": 3.4624632,
+        "MAE": 2.67201782,
+        "bias": 0.47977463
+      },
+      {
+        "group": "60+",
+        "model": "XGBoost v4",
+        "rows": 6360,
+        "RMSE": 3.06919591,
+        "MAE": 2.30013101,
+        "bias": -0.01338357
+      }
+    ],
+    "cold_start": [
+      {
+        "group": "Cold start",
+        "model": "Recent-five",
+        "rows": 844,
+        "RMSE": 2.38911121,
+        "MAE": 1.58839409,
+        "bias": -0.01833114
+      },
+      {
+        "group": "Cold start",
+        "model": "XGBoost v4",
+        "rows": 844,
+        "RMSE": 2.29436912,
+        "MAE": 1.47130055,
+        "bias": -0.00615596
+      },
+      {
+        "group": "Prior records",
+        "model": "Recent-five",
+        "rows": 28903,
+        "RMSE": 2.10975851,
+        "MAE": 1.042589,
+        "bias": 0.01485486
+      },
+      {
+        "group": "Prior records",
+        "model": "XGBoost v4",
+        "rows": 28903,
+        "RMSE": 1.88866099,
+        "MAE": 0.94549182,
+        "bias": -0.01459617
+      }
+    ],
+    "selection_cohort": [
+      {
+        "group": "Available, prior 60+",
+        "model": "Recent-five",
+        "rows": 5909,
+        "RMSE": 3.45554105,
+        "MAE": 2.6461584,
+        "bias": 0.34579173
+      },
+      {
+        "group": "Available, prior 60+",
+        "model": "XGBoost v4",
+        "rows": 5909,
+        "RMSE": 3.11599545,
+        "MAE": 2.36321278,
+        "bias": -0.03599199
+      },
+      {
+        "group": "Available, other",
+        "model": "Recent-five",
+        "rows": 13701,
+        "RMSE": 1.94733724,
+        "MAE": 0.90051829,
+        "bias": -0.29235021
+      },
+      {
+        "group": "Available, other",
+        "model": "XGBoost v4",
+        "rows": 13701,
+        "RMSE": 1.81737447,
+        "MAE": 0.93140678,
+        "bias": -0.02842992
+      },
+      {
+        "group": "Other status",
+        "model": "Recent-five",
+        "rows": 10137,
+        "RMSE": 1.03947813,
+        "MAE": 0.34530961,
+        "bias": 0.23439731
+      },
+      {
+        "group": "Other status",
+        "model": "XGBoost v4",
+        "rows": 10137,
+        "RMSE": 0.69636927,
+        "MAE": 0.1818979,
+        "bias": 0.01727596
+      }
+    ]
+  }
+}
