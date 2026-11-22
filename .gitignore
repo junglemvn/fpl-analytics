@@ -1,25 +1,74 @@
-# Local data and external archive
+# Local data and model artifacts
 /data/
 /epl-premier-league-dataset/
-
-# Generated artifacts
-__pycache__/
-*.py[cod]
-.ipynb_checkpoints/
-.pytest_cache/
-.cache/
+/complete-football-analytics-main/
 *.pkl
 *.joblib
+*.ubj
+*.onnx
+*.pt
+*.pth
+*.ckpt
 *.sqlite*
-.DS_Store
 
-# Local environments and settings
+# Environments, credentials and caches
 .venv/
 venv/
 .env
 .env.*
 !.env.example
+__pycache__/
+*.py[cod]
+*.command
+.ipynb_checkpoints/
+.pytest_cache/
+.cache/
+.DS_Store
+/tests/
+
+# Shared editor recommendations
 /.vscode/*
 !/.vscode/extensions.json
-/Setup VS Code.command
-/docs/vscode_setup.md
+
+# Public notebooks
+/notebooks/*
+!/notebooks/01_data_preparation.ipynb
+!/notebooks/02_eda.ipynb
+!/notebooks/03_data_split_and_benchmarks.ipynb
+!/notebooks/04_model_results.ipynb
+!/notebooks/05_squad_results.ipynb
+
+# Public source modules
+/src/*
+!/src/collect_fpl.py
+!/src/collect_players.py
+!/src/collect_teams.py
+!/src/download_dataset.py
+!/src/data_preparation.py
+!/src/eda_preparation.py
+!/src/fotmob_identity.py
+!/src/defensive_contributions.py
+!/src/player_analysis.py
+!/src/team_analysis.py
+!/src/current_player_analysis.py
+!/src/current_team_analysis.py
+!/src/analysis_synthesis.py
+!/src/ranking_uncertainty.py
+!/src/plot_annotations.py
+!/src/model_preparation.py
+!/src/squad_selection.py
+!/src/squad_assessment.py
+!/src/fpl_manager.py
+!/src/public_squad_report.py
+
+# Public documentation
+/docs/*
+!/docs/fpl_rules.md
+!/docs/fpl_collection_learning.md
+
+# Public result summaries
+/reports/*
+!/reports/public/
+/reports/public/*
+!/reports/public/model_results.json
+!/reports/public/squad_results.json
