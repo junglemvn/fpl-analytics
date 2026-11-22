@@ -1,0 +1,866 @@
+{
+  "schema_version": "fpl_public_squad_results_v1",
+  "season": "2026/27",
+  "evaluation": "Retrospective GW1–10 replay; GW11 recommendation remains unscored",
+  "source_review_sha256": "c2c5c2250d3e112523050ff3bf4ed3e4c08ddd1e30033a80b3c1d8d5771e2b50",
+  "protocol": [
+    {
+      "setting": "Initial squad",
+      "value": "£100m; 15 players; standard FPL composition"
+    },
+    {
+      "setting": "Decision horizon",
+      "value": "Four gameweeks, capped at GW19"
+    },
+    {
+      "setting": "Transfers",
+      "value": "Hold or at most one free move per deadline"
+    },
+    {
+      "setting": "Scoring",
+      "value": "Official points, legal autosubs and captain/vice fallback"
+    },
+    {
+      "setting": "Availability boundary",
+      "value": "Dated captures; results after kickoff + 24h"
+    },
+    {
+      "setting": "Policies",
+      "value": "Standard; maximum two starting DEF per club"
+    },
+    {
+      "setting": "Chips and paid transfers",
+      "value": "Unused in this replay"
+    }
+  ],
+  "manager_totals": [
+    {
+      "source": "Recent-five",
+      "variant": "Defender cap",
+      "net_points": 279,
+      "moves": 9,
+      "captain_points": 35,
+      "auto_sub_points": 0,
+      "vs_average": -284
+    },
+    {
+      "source": "Recent-five",
+      "variant": "Standard",
+      "net_points": 299,
+      "moves": 9,
+      "captain_points": 33,
+      "auto_sub_points": 2,
+      "vs_average": -264
+    },
+    {
+      "source": "Frozen XGBoost",
+      "variant": "Defender cap",
+      "net_points": 367,
+      "moves": 9,
+      "captain_points": 39,
+      "auto_sub_points": 3,
+      "vs_average": -196
+    },
+    {
+      "source": "Frozen XGBoost",
+      "variant": "Standard",
+      "net_points": 307,
+      "moves": 9,
+      "captain_points": 38,
+      "auto_sub_points": 5,
+      "vs_average": -256
+    },
+    {
+      "source": "Preseason → XGBoost",
+      "variant": "Defender cap",
+      "net_points": 593,
+      "moves": 9,
+      "captain_points": 43,
+      "auto_sub_points": 23,
+      "vs_average": 30
+    },
+    {
+      "source": "Preseason → XGBoost",
+      "variant": "Standard",
+      "net_points": 593,
+      "moves": 9,
+      "captain_points": 43,
+      "auto_sub_points": 23,
+      "vs_average": 30
+    }
+  ],
+  "weekly": [
+    {
+      "source": "Recent-five",
+      "variant": "Defender cap",
+      "GW": 1,
+      "gross_points": 7,
+      "transfer_hits": 0,
+      "net_points": 7,
+      "cumulative_net": 7
+    },
+    {
+      "source": "Recent-five",
+      "variant": "Defender cap",
+      "GW": 2,
+      "gross_points": 2,
+      "transfer_hits": 0,
+      "net_points": 2,
+      "cumulative_net": 9
+    },
+    {
+      "source": "Recent-five",
+      "variant": "Defender cap",
+      "GW": 3,
+      "gross_points": 10,
+      "transfer_hits": 0,
+      "net_points": 10,
+      "cumulative_net": 19
+    },
+    {
+      "source": "Recent-five",
+      "variant": "Defender cap",
+      "GW": 4,
+      "gross_points": 17,
+      "transfer_hits": 0,
+      "net_points": 17,
+      "cumulative_net": 36
+    },
+    {
+      "source": "Recent-five",
+      "variant": "Defender cap",
+      "GW": 5,
+      "gross_points": 23,
+      "transfer_hits": 0,
+      "net_points": 23,
+      "cumulative_net": 59
+    },
+    {
+      "source": "Recent-five",
+      "variant": "Defender cap",
+      "GW": 6,
+      "gross_points": 42,
+      "transfer_hits": 0,
+      "net_points": 42,
+      "cumulative_net": 101
+    },
+    {
+      "source": "Recent-five",
+      "variant": "Defender cap",
+      "GW": 7,
+      "gross_points": 37,
+      "transfer_hits": 0,
+      "net_points": 37,
+      "cumulative_net": 138
+    },
+    {
+      "source": "Recent-five",
+      "variant": "Defender cap",
+      "GW": 8,
+      "gross_points": 21,
+      "transfer_hits": 0,
+      "net_points": 21,
+      "cumulative_net": 159
+    },
+    {
+      "source": "Recent-five",
+      "variant": "Defender cap",
+      "GW": 9,
+      "gross_points": 36,
+      "transfer_hits": 0,
+      "net_points": 36,
+      "cumulative_net": 195
+    },
+    {
+      "source": "Recent-five",
+      "variant": "Defender cap",
+      "GW": 10,
+      "gross_points": 84,
+      "transfer_hits": 0,
+      "net_points": 84,
+      "cumulative_net": 279
+    },
+    {
+      "source": "Recent-five",
+      "variant": "Standard",
+      "GW": 1,
+      "gross_points": 9,
+      "transfer_hits": 0,
+      "net_points": 9,
+      "cumulative_net": 9
+    },
+    {
+      "source": "Recent-five",
+      "variant": "Standard",
+      "GW": 2,
+      "gross_points": 4,
+      "transfer_hits": 0,
+      "net_points": 4,
+      "cumulative_net": 13
+    },
+    {
+      "source": "Recent-five",
+      "variant": "Standard",
+      "GW": 3,
+      "gross_points": 13,
+      "transfer_hits": 0,
+      "net_points": 13,
+      "cumulative_net": 26
+    },
+    {
+      "source": "Recent-five",
+      "variant": "Standard",
+      "GW": 4,
+      "gross_points": 17,
+      "transfer_hits": 0,
+      "net_points": 17,
+      "cumulative_net": 43
+    },
+    {
+      "source": "Recent-five",
+      "variant": "Standard",
+      "GW": 5,
+      "gross_points": 38,
+      "transfer_hits": 0,
+      "net_points": 38,
+      "cumulative_net": 81
+    },
+    {
+      "source": "Recent-five",
+      "variant": "Standard",
+      "GW": 6,
+      "gross_points": 37,
+      "transfer_hits": 0,
+      "net_points": 37,
+      "cumulative_net": 118
+    },
+    {
+      "source": "Recent-five",
+      "variant": "Standard",
+      "GW": 7,
+      "gross_points": 34,
+      "transfer_hits": 0,
+      "net_points": 34,
+      "cumulative_net": 152
+    },
+    {
+      "source": "Recent-five",
+      "variant": "Standard",
+      "GW": 8,
+      "gross_points": 32,
+      "transfer_hits": 0,
+      "net_points": 32,
+      "cumulative_net": 184
+    },
+    {
+      "source": "Recent-five",
+      "variant": "Standard",
+      "GW": 9,
+      "gross_points": 39,
+      "transfer_hits": 0,
+      "net_points": 39,
+      "cumulative_net": 223
+    },
+    {
+      "source": "Recent-five",
+      "variant": "Standard",
+      "GW": 10,
+      "gross_points": 76,
+      "transfer_hits": 0,
+      "net_points": 76,
+      "cumulative_net": 299
+    },
+    {
+      "source": "Frozen XGBoost",
+      "variant": "Defender cap",
+      "GW": 1,
+      "gross_points": 13,
+      "transfer_hits": 0,
+      "net_points": 13,
+      "cumulative_net": 13
+    },
+    {
+      "source": "Frozen XGBoost",
+      "variant": "Defender cap",
+      "GW": 2,
+      "gross_points": 26,
+      "transfer_hits": 0,
+      "net_points": 26,
+      "cumulative_net": 39
+    },
+    {
+      "source": "Frozen XGBoost",
+      "variant": "Defender cap",
+      "GW": 3,
+      "gross_points": 22,
+      "transfer_hits": 0,
+      "net_points": 22,
+      "cumulative_net": 61
+    },
+    {
+      "source": "Frozen XGBoost",
+      "variant": "Defender cap",
+      "GW": 4,
+      "gross_points": 32,
+      "transfer_hits": 0,
+      "net_points": 32,
+      "cumulative_net": 93
+    },
+    {
+      "source": "Frozen XGBoost",
+      "variant": "Defender cap",
+      "GW": 5,
+      "gross_points": 49,
+      "transfer_hits": 0,
+      "net_points": 49,
+      "cumulative_net": 142
+    },
+    {
+      "source": "Frozen XGBoost",
+      "variant": "Defender cap",
+      "GW": 6,
+      "gross_points": 25,
+      "transfer_hits": 0,
+      "net_points": 25,
+      "cumulative_net": 167
+    },
+    {
+      "source": "Frozen XGBoost",
+      "variant": "Defender cap",
+      "GW": 7,
+      "gross_points": 60,
+      "transfer_hits": 0,
+      "net_points": 60,
+      "cumulative_net": 227
+    },
+    {
+      "source": "Frozen XGBoost",
+      "variant": "Defender cap",
+      "GW": 8,
+      "gross_points": 46,
+      "transfer_hits": 0,
+      "net_points": 46,
+      "cumulative_net": 273
+    },
+    {
+      "source": "Frozen XGBoost",
+      "variant": "Defender cap",
+      "GW": 9,
+      "gross_points": 37,
+      "transfer_hits": 0,
+      "net_points": 37,
+      "cumulative_net": 310
+    },
+    {
+      "source": "Frozen XGBoost",
+      "variant": "Defender cap",
+      "GW": 10,
+      "gross_points": 57,
+      "transfer_hits": 0,
+      "net_points": 57,
+      "cumulative_net": 367
+    },
+    {
+      "source": "Frozen XGBoost",
+      "variant": "Standard",
+      "GW": 1,
+      "gross_points": 11,
+      "transfer_hits": 0,
+      "net_points": 11,
+      "cumulative_net": 11
+    },
+    {
+      "source": "Frozen XGBoost",
+      "variant": "Standard",
+      "GW": 2,
+      "gross_points": 21,
+      "transfer_hits": 0,
+      "net_points": 21,
+      "cumulative_net": 32
+    },
+    {
+      "source": "Frozen XGBoost",
+      "variant": "Standard",
+      "GW": 3,
+      "gross_points": 15,
+      "transfer_hits": 0,
+      "net_points": 15,
+      "cumulative_net": 47
+    },
+    {
+      "source": "Frozen XGBoost",
+      "variant": "Standard",
+      "GW": 4,
+      "gross_points": 22,
+      "transfer_hits": 0,
+      "net_points": 22,
+      "cumulative_net": 69
+    },
+    {
+      "source": "Frozen XGBoost",
+      "variant": "Standard",
+      "GW": 5,
+      "gross_points": 41,
+      "transfer_hits": 0,
+      "net_points": 41,
+      "cumulative_net": 110
+    },
+    {
+      "source": "Frozen XGBoost",
+      "variant": "Standard",
+      "GW": 6,
+      "gross_points": 20,
+      "transfer_hits": 0,
+      "net_points": 20,
+      "cumulative_net": 130
+    },
+    {
+      "source": "Frozen XGBoost",
+      "variant": "Standard",
+      "GW": 7,
+      "gross_points": 55,
+      "transfer_hits": 0,
+      "net_points": 55,
+      "cumulative_net": 185
+    },
+    {
+      "source": "Frozen XGBoost",
+      "variant": "Standard",
+      "GW": 8,
+      "gross_points": 33,
+      "transfer_hits": 0,
+      "net_points": 33,
+      "cumulative_net": 218
+    },
+    {
+      "source": "Frozen XGBoost",
+      "variant": "Standard",
+      "GW": 9,
+      "gross_points": 37,
+      "transfer_hits": 0,
+      "net_points": 37,
+      "cumulative_net": 255
+    },
+    {
+      "source": "Frozen XGBoost",
+      "variant": "Standard",
+      "GW": 10,
+      "gross_points": 52,
+      "transfer_hits": 0,
+      "net_points": 52,
+      "cumulative_net": 307
+    },
+    {
+      "source": "Preseason → XGBoost",
+      "variant": "Defender cap",
+      "GW": 1,
+      "gross_points": 46,
+      "transfer_hits": 0,
+      "net_points": 46,
+      "cumulative_net": 46
+    },
+    {
+      "source": "Preseason → XGBoost",
+      "variant": "Defender cap",
+      "GW": 2,
+      "gross_points": 83,
+      "transfer_hits": 0,
+      "net_points": 83,
+      "cumulative_net": 129
+    },
+    {
+      "source": "Preseason → XGBoost",
+      "variant": "Defender cap",
+      "GW": 3,
+      "gross_points": 37,
+      "transfer_hits": 0,
+      "net_points": 37,
+      "cumulative_net": 166
+    },
+    {
+      "source": "Preseason → XGBoost",
+      "variant": "Defender cap",
+      "GW": 4,
+      "gross_points": 75,
+      "transfer_hits": 0,
+      "net_points": 75,
+      "cumulative_net": 241
+    },
+    {
+      "source": "Preseason → XGBoost",
+      "variant": "Defender cap",
+      "GW": 5,
+      "gross_points": 31,
+      "transfer_hits": 0,
+      "net_points": 31,
+      "cumulative_net": 272
+    },
+    {
+      "source": "Preseason → XGBoost",
+      "variant": "Defender cap",
+      "GW": 6,
+      "gross_points": 48,
+      "transfer_hits": 0,
+      "net_points": 48,
+      "cumulative_net": 320
+    },
+    {
+      "source": "Preseason → XGBoost",
+      "variant": "Defender cap",
+      "GW": 7,
+      "gross_points": 65,
+      "transfer_hits": 0,
+      "net_points": 65,
+      "cumulative_net": 385
+    },
+    {
+      "source": "Preseason → XGBoost",
+      "variant": "Defender cap",
+      "GW": 8,
+      "gross_points": 61,
+      "transfer_hits": 0,
+      "net_points": 61,
+      "cumulative_net": 446
+    },
+    {
+      "source": "Preseason → XGBoost",
+      "variant": "Defender cap",
+      "GW": 9,
+      "gross_points": 65,
+      "transfer_hits": 0,
+      "net_points": 65,
+      "cumulative_net": 511
+    },
+    {
+      "source": "Preseason → XGBoost",
+      "variant": "Defender cap",
+      "GW": 10,
+      "gross_points": 82,
+      "transfer_hits": 0,
+      "net_points": 82,
+      "cumulative_net": 593
+    },
+    {
+      "source": "Preseason → XGBoost",
+      "variant": "Standard",
+      "GW": 1,
+      "gross_points": 46,
+      "transfer_hits": 0,
+      "net_points": 46,
+      "cumulative_net": 46
+    },
+    {
+      "source": "Preseason → XGBoost",
+      "variant": "Standard",
+      "GW": 2,
+      "gross_points": 83,
+      "transfer_hits": 0,
+      "net_points": 83,
+      "cumulative_net": 129
+    },
+    {
+      "source": "Preseason → XGBoost",
+      "variant": "Standard",
+      "GW": 3,
+      "gross_points": 37,
+      "transfer_hits": 0,
+      "net_points": 37,
+      "cumulative_net": 166
+    },
+    {
+      "source": "Preseason → XGBoost",
+      "variant": "Standard",
+      "GW": 4,
+      "gross_points": 75,
+      "transfer_hits": 0,
+      "net_points": 75,
+      "cumulative_net": 241
+    },
+    {
+      "source": "Preseason → XGBoost",
+      "variant": "Standard",
+      "GW": 5,
+      "gross_points": 31,
+      "transfer_hits": 0,
+      "net_points": 31,
+      "cumulative_net": 272
+    },
+    {
+      "source": "Preseason → XGBoost",
+      "variant": "Standard",
+      "GW": 6,
+      "gross_points": 48,
+      "transfer_hits": 0,
+      "net_points": 48,
+      "cumulative_net": 320
+    },
+    {
+      "source": "Preseason → XGBoost",
+      "variant": "Standard",
+      "GW": 7,
+      "gross_points": 65,
+      "transfer_hits": 0,
+      "net_points": 65,
+      "cumulative_net": 385
+    },
+    {
+      "source": "Preseason → XGBoost",
+      "variant": "Standard",
+      "GW": 8,
+      "gross_points": 61,
+      "transfer_hits": 0,
+      "net_points": 61,
+      "cumulative_net": 446
+    },
+    {
+      "source": "Preseason → XGBoost",
+      "variant": "Standard",
+      "GW": 9,
+      "gross_points": 65,
+      "transfer_hits": 0,
+      "net_points": 65,
+      "cumulative_net": 511
+    },
+    {
+      "source": "Preseason → XGBoost",
+      "variant": "Standard",
+      "GW": 10,
+      "gross_points": 82,
+      "transfer_hits": 0,
+      "net_points": 82,
+      "cumulative_net": 593
+    }
+  ],
+  "benchmark": [
+    {
+      "GW": 1,
+      "manager_average": 50,
+      "manager_maximum": 131
+    },
+    {
+      "GW": 2,
+      "manager_average": 81,
+      "manager_maximum": 161
+    },
+    {
+      "GW": 3,
+      "manager_average": 51,
+      "manager_maximum": 119
+    },
+    {
+      "GW": 4,
+      "manager_average": 69,
+      "manager_maximum": 151
+    },
+    {
+      "GW": 5,
+      "manager_average": 48,
+      "manager_maximum": 126
+    },
+    {
+      "GW": 6,
+      "manager_average": 58,
+      "manager_maximum": 131
+    },
+    {
+      "GW": 7,
+      "manager_average": 59,
+      "manager_maximum": 122
+    },
+    {
+      "GW": 8,
+      "manager_average": 45,
+      "manager_maximum": 120
+    },
+    {
+      "GW": 9,
+      "manager_average": 47,
+      "manager_maximum": 122
+    },
+    {
+      "GW": 10,
+      "manager_average": 55,
+      "manager_maximum": 139
+    }
+  ],
+  "forecast_accuracy": [
+    {
+      "source": "Recent-five",
+      "records": 6520,
+      "MAE": 1.2904,
+      "RMSE": 2.3795,
+      "bias": 0.0007
+    },
+    {
+      "source": "Frozen XGBoost",
+      "records": 6520,
+      "MAE": 1.1428,
+      "RMSE": 2.0895,
+      "bias": -0.0698
+    },
+    {
+      "source": "Preseason → XGBoost",
+      "records": 6520,
+      "MAE": 1.1397,
+      "RMSE": 2.0768,
+      "bias": -0.0549
+    }
+  ],
+  "opening": [
+    {
+      "source": "Recent-five",
+      "variant": "Defender cap",
+      "XI_with_minutes": 4,
+      "XI_60_plus": 1,
+      "net_points": 7
+    },
+    {
+      "source": "Recent-five",
+      "variant": "Standard",
+      "XI_with_minutes": 3,
+      "XI_60_plus": 2,
+      "net_points": 9
+    },
+    {
+      "source": "Frozen XGBoost",
+      "variant": "Defender cap",
+      "XI_with_minutes": 7,
+      "XI_60_plus": 3,
+      "net_points": 13
+    },
+    {
+      "source": "Frozen XGBoost",
+      "variant": "Standard",
+      "XI_with_minutes": 6,
+      "XI_60_plus": 1,
+      "net_points": 11
+    },
+    {
+      "source": "Preseason → XGBoost",
+      "variant": "Defender cap",
+      "XI_with_minutes": 11,
+      "XI_60_plus": 11,
+      "net_points": 46
+    },
+    {
+      "source": "Preseason → XGBoost",
+      "variant": "Standard",
+      "XI_with_minutes": 11,
+      "XI_60_plus": 11,
+      "net_points": 46
+    }
+  ],
+  "gw11": {
+    "source": "Preseason → XGBoost",
+    "variant": "Standard",
+    "as_of_utc": "2026-11-21 06:47:00+00:00",
+    "deadline_utc": "2026-11-21 11:00:00+00:00",
+    "formation": "3-5-2",
+    "incoming": "Evanilson",
+    "outgoing": "Walle Egeli",
+    "captain": "Ødegaard",
+    "vice": "Barry",
+    "bank_m": 4.6,
+    "expected_points": 54.8,
+    "expected_horizon_points": 217.97,
+    "lineup": [
+      {
+        "web_name": "Raya",
+        "position": "GK",
+        "role": "XI",
+        "expected_points": 4.0064
+      },
+      {
+        "web_name": "Gabriel",
+        "position": "DEF",
+        "role": "XI",
+        "expected_points": 4.102
+      },
+      {
+        "web_name": "Van Hecke",
+        "position": "DEF",
+        "role": "XI",
+        "expected_points": 4.3328
+      },
+      {
+        "web_name": "De Cuyper",
+        "position": "DEF",
+        "role": "XI",
+        "expected_points": 4.2158
+      },
+      {
+        "web_name": "Ødegaard",
+        "position": "MID",
+        "role": "Captain",
+        "expected_points": 5.0598
+      },
+      {
+        "web_name": "Rogers",
+        "position": "MID",
+        "role": "XI",
+        "expected_points": 4.4351
+      },
+      {
+        "web_name": "Tavernier",
+        "position": "MID",
+        "role": "XI",
+        "expected_points": 4.7068
+      },
+      {
+        "web_name": "Groß",
+        "position": "MID",
+        "role": "XI",
+        "expected_points": 4.9751
+      },
+      {
+        "web_name": "Mbeumo",
+        "position": "MID",
+        "role": "XI",
+        "expected_points": 3.8966
+      },
+      {
+        "web_name": "Evanilson",
+        "position": "FWD",
+        "role": "XI",
+        "expected_points": 4.9521
+      },
+      {
+        "web_name": "Barry",
+        "position": "FWD",
+        "role": "Vice",
+        "expected_points": 5.055
+      },
+      {
+        "web_name": "Dubravka",
+        "position": "GK",
+        "role": "Reserve GK",
+        "expected_points": 0.0507
+      },
+      {
+        "web_name": "Truffert",
+        "position": "DEF",
+        "role": "Bench 1",
+        "expected_points": 3.2723
+      },
+      {
+        "web_name": "Guéhi",
+        "position": "DEF",
+        "role": "Bench 2",
+        "expected_points": 1.9823
+      },
+      {
+        "web_name": "Thiago",
+        "position": "FWD",
+        "role": "Bench 3",
+        "expected_points": 0.7154
+      }
+    ]
+  },
+  "limitations": [
+    "Ten retrospective gameweeks are development evidence, not a prospective test.",
+    "The field averages include chip users; aggregate transfer-hit treatment is unverified.",
+    "Opening squads differ, so policy results do not isolate the forecasting model's effect.",
+    "The standard lineups already met the defender cap; tied solutions can follow different paths.",
+    "Later-collected statistics may contain revisions; the 24-hour delay approximates publication time."
+  ]
+}
