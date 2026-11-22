@@ -1,24 +1,31 @@
 # FPL learning and analysis
 
-Collect, prepare and explore FPL player, team and fixture data. Preparation and the initial EDA are complete. Next: pre-deadline forecasting and constrained squad selection. PostgreSQL and SQL learning remain later work.
+Collect FPL data, prepare player/team histories and forecast player-fixture fantasy points.
+Preparation, EDA and the frozen model's historical evaluation are complete. The next stage is
+constrained squad selection. The public repository contains preparation/analysis code,
+chronological benchmarks and a results notebook; final model training, tuned settings and
+weights remain private. PostgreSQL and deployment remain later work.
 
 ## Repository navigation
 
 ```text
-src/                            Collection, preparation and reusable EDA calculations
+src/                            Public collection, preparation, EDA and benchmark helpers
 notebooks/
   01_data_preparation.ipynb       Completed preparation and validation
   02_eda.ipynb                   Completed player/team EDA and findings
+  03_data_split_and_benchmarks.ipynb  Chronological split, benchmarks and validation errors
+  04_model_results.ipynb          Public development and reserved-test results
+reports/public/
+  model_results.json             Aggregate results used by the public notebook
+logos/                          All 27 club emblems used by the historical/current data
 docs/
   fpl_rules.md                   Scoring definitions and target policy
   fpl_collection_learning.md     Collection commands and table definitions
-  notebook_style.md              Structure, wording, code and validation conventions
-  02_eda_plan.md                 EDA scope, treatments and validation results
 .vscode/extensions.json          Shared editor recommendations
 requirements.txt                Python dependencies
 .gitignore                      Local data, caches and machine settings
 README.md                       Project status and navigation
-LICENSE                         Personal, noncommercial code-use terms
+LICENSE                         MIT License
 ```
 
 External archive: **`/epl-premier-league-dataset`**, retained locally. It is the downloaded [source dataset](https://huggingface.co/datasets/Toibinguz/epl-premier-league-dataset); its location is configured by `ARCHIVE_DIR` in Notebook 1.
@@ -27,7 +34,7 @@ External archive: **`/epl-premier-league-dataset`**, retained locally. It is the
 
 **Self-collected API responses** is the appropriate term for the raw JSON. Parsing converts those responses into records; cleaning and joining produce **prepared tables**. The combined player history is a **joined player-fixture table**.
 
-These data paths are local and excluded from Git:
+These self-collected data and derived-table paths are local and excluded from Git:
 
 ```text
 data/raw/fpl_api/<season>/<batch_utc>/
@@ -52,6 +59,10 @@ data/processed/
   fpl_eda_tables.pkl                 Profiles, rankings, team context and stability summaries
   fpl_eda_audits.pkl                 Quality checks, treatments and ranking diagnostics
   fpl_eda_manifest.json              Coverage, treatments and input/code checksums
+  forecasts/<season>_GW<gw>_<batch>/
+    fixture_expectations_v4.csv       Player-fixture expected points
+    gameweek_expectations_v4.csv      Roster-preserving gameweek totals and prices
+    forecast_receipt_v4.json          Source batch, deadline, coverage and model version
 ```
 
 For future canonical CSV exports, use `players_<season>.csv`, `teams_<season>.csv`, `fixtures_<season>.csv` and `player_matches_<season>.csv`. Describe their grain explicitly and retain FPL IDs. Existing `fpl_*` filenames remain available for source-format compatibility; current files have not been renamed.
@@ -78,7 +89,7 @@ The completed analysis covers:
 - Current player/team progress, recent fixture windows and prior-only opponent context
 - Gameweek-resampling diagnostics showing uncertainty in close player rankings
 
-Start with the notebook's findings and reading path. Full tables, audits and provenance are saved separately in `fpl_eda_tables.pkl`, `fpl_eda_audits.pkl` and `fpl_eda_manifest.json`. These are descriptive outputs; forecasting features still need pre-deadline cutoffs. See the [EDA scope](docs/02_eda_plan.md) and [notebook conventions](docs/notebook_style.md).
+The notebook opens with its main findings and links to the supporting analysis. Full tables, audits and provenance are saved separately in `fpl_eda_tables.pkl`, `fpl_eda_audits.pkl` and `fpl_eda_manifest.json`. These are descriptive outputs; forecasting features still need pre-deadline cutoffs.
 
 Club emblems load from `logos/`, with coverage checks for all five seasons and image checksums in the EDA manifest. No separate logo archive is required.
 
@@ -95,29 +106,112 @@ Club emblems load from `logos/`, with coverage checks for all five seasons and i
 - `src/current_team_analysis.py`: current team form and prior-only opponent context
 - `src/analysis_synthesis.py`: recurring point-source and team patterns across seasons
 - `src/ranking_uncertainty.py`: shared-gameweek resampling and ranking stability
+- `src/model_preparation.py`: chronological partitions, cutoff-aware histories and benchmarks
 - `src/fotmob_identity.py`, `src/defensive_contributions.py`: historical enrichment
 - `src/download_dataset.py`: archive download utility
 
 See [the collection guide](docs/fpl_collection_learning.md) for commands. Use the same Python environment for scripts and notebooks, with dependencies from `requirements.txt`. Editor interpreter settings and Mac-specific setup helpers remain local.
 
-## Next stage
+## Forecast evaluation complete
 
-1. Define the next-gameweek points target and create lagged player, team and opponent features
-2. Compare simple benchmarks, regularized regression and boosted trees using chronological validation
-3. Evaluate team scoreline and clean-sheet probabilities, plus player participation forecasts
-4. Optimise squad, XI, captain and bench under budget, position and club limits
-5. Extend to several gameweeks, availability updates and transfer decisions
+[Notebook 3](notebooks/03_data_split_and_benchmarks.ipynb) establishes season partitions,
+cutoff-aware histories and point benchmarks. Development fitting uses 2022/23–2023/24 and
+validation uses 2024/25. The final frozen model and benchmark are refitted on
+2022/23–2024/25 before evaluation on the original 2025/26 reserved partition.
 
-Save dated prices and availability with future collections. The current snapshot cannot establish what was known before every historical deadline. Consult the rules reference for the limits of historical `P_adj`; it harmonises defensive rewards and reviewed corrections, not every scoring-rule change.
+[The public results notebook](notebooks/04_model_results.ipynb) loads aggregate results from
+[the public summary](reports/public/model_results.json). It reports feature experiments,
+availability coverage and grouped errors without exposing the fitted model or tuned settings.
+
+| 2025/26 reserved evaluation | Player-fixtures | RMSE | MAE |
+|---|---:|---:|---:|
+| Frozen XGBoost v4 | 29,747 | 1.9014 | 0.9604 |
+| Recent-five benchmark | 29,747 | 2.1182 | 1.0581 |
+
+Both forecasts cover identical records. Model parameters remain fixed while eligible earlier
+histories advance. Archived FPL status and round-matched playing chance supply availability;
+current status is not joined backward onto historical fixtures. Historical cutoffs use a
+first-kickoff-minus-24-hour proxy and results enter history after a fixed 24-hour delay.
+These assumptions and corrected source data limit exact historical replay.
+
+The test season appeared in descriptive EDA but was reserved during predictive selection.
+The scoring receipt now records completed evaluation; the original preparation manifest
+preserves its earlier unscored state. Current-season monitoring is separate. Historical
+`P_adj` harmonises defensive rewards and reviewed corrections, not every scoring-rule change.
+See [the scoring reference](docs/fpl_rules.md).
+
+The initial GW12 forecast export contains 672 fixture forecasts and 672 roster totals,
+captured on 21 November 2026 at 16:45 UTC. Its match history ends at GW10; refresh after
+GW11 results become available before treating it as a deadline-time recommendation.
+These are forecast inputs for selection, not evidence of realised squad performance.
+
+## Next stage: squad selection
+
+Notebook 5 is planned and has not been created. It will consume forecasts rather than fit
+another model:
+
+1. Validate gameweek totals against fixture forecasts and the dated roster/price snapshot
+2. Select a legal squad, XI and captain under budget, position and club constraints
+3. Verify the objective and legality independently, including small exhaustive examples
+4. Compare XGBoost and recent-five selections under identical decision rules
+5. Save recommendations before deadlines and evaluate subsequent outcomes
+
+The initial objective covers starting-XI points and normal captaincy. Transfers, automatic
+substitutions, chips and multiweek planning follow later. Fresh data updates features and
+predictions; retraining and new research versions are separate processes. Any refit using
+2025/26 outcomes requires later evaluation rather than reusing the earlier test claim.
+
+## Public source modules
+
+Upload these existing `src/` files. They support the public preparation, EDA and benchmark
+notebooks without importing the private forecasting helpers.
+
+| Area | Files |
+|---|---|
+| Collection and download | `collect_fpl.py`, `collect_players.py`, `collect_teams.py`, `download_dataset.py` |
+| Preparation and enrichment | `data_preparation.py`, `eda_preparation.py`, `fotmob_identity.py`, `defensive_contributions.py` |
+| Player/team analysis | `player_analysis.py`, `team_analysis.py`, `current_player_analysis.py`, `current_team_analysis.py` |
+| Synthesis and figures | `analysis_synthesis.py`, `ranking_uncertainty.py`, `plot_annotations.py` |
+| Chronological benchmarks | `model_preparation.py` |
 
 ## GitHub scope
 
-Upload the code, both notebooks, documentation, required `logos/` assets and root files shown above. Include `.vscode/extensions.json` as the shared editor configuration. Saved notebook charts and concise tables can remain for readers to inspect without the local datasets.
+Include the public source modules above, notebooks 1–3 and `04_model_results.ipynb`,
+`reports/public/model_results.json`, required `logos/`, the two public documents and the root
+README, license, requirements and ignore files. `.vscode/extensions.json` is the only shared
+editor setting. Selected notebook outputs can remain for reading without local datasets.
 
-Keep `tests/`, raw batches, processed tables, the external archive, caches, virtual environments, local editor settings and machine-specific setup helpers outside Git. The current `.gitignore` covers these paths. Add modelling notebooks, model code and curated reports when implemented; keep generated model binaries local.
+Keep the following source files and the working modelling notebook local:
+
+```text
+notebooks/04_boosting_and_forecasts.ipynb
+src/boosting_features.py
+src/boosting_experiments.py
+src/fpl_availability.py
+src/fpl_forecast_context.py
+src/fpl_followup_diagnostics.py
+src/fpl_final_pipeline.py
+src/fpl_forecast_exports.py
+```
+
+The diagnostics helper contains tuned parameter values, and the final pipeline uses the
+private model contract. The other excluded modules implement forecasting features and
+experiments. Keeping the whole group private makes the publication boundary explicit.
+
+Keep raw/processed data, model JSONs and manifests, local tests, planning notes, external
+archives, caches and environments outside Git. Only the approved aggregate public report
+is included from `reports/`. `.gitignore` records these exclusions; manually upload the
+public files rather than the whole `src/` folder. If a private file was already published,
+adding an ignore rule does not remove its earlier contents from repository history.
+
+The public results notebook reproduces result tables from the supplied summary. It does not
+retrain the private model. Public preparation/EDA notebooks require local source data; the
+public benchmark code remains available for inspecting the evaluation logic.
 
 ## Copyright and use
 
-Copyright © 2026 Zhangir Bayanov. All rights reserved.
+Copyright © 2026 Zhangir Bayanov.
 
-The original code is available for personal, noncommercial use under the repository's license. Commercial use requires the copyright holder's permission. [License terms](LICENSE)
+The original code is available under the [MIT License](LICENSE), permitting use, modification
+and redistribution, including commercial use. Third-party datasets and assets retain their
+own terms.
